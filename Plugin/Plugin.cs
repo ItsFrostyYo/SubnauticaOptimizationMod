@@ -25,7 +25,7 @@ namespace ItsFrosti.OptimizationsMod
         public const string PluginId = "ItsFrosti.OptimizationsMod";
         public const string PluginName = "Optimizations Mod";
         public const string PluginVersion = "1.0.0";
-        public const bool AutomaticUpdateEnabled = false;
+        public const bool AutomaticUpdateEnabled = true;
         public const string UpdateRepository = "ItsFrostyYo/SubnauticaOptimizationMod";
         public const string UpdateManifestUrl = "https://raw.githubusercontent.com/" + UpdateRepository + "/main/dist/mod-update.xml";
 
