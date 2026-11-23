@@ -24,20 +24,21 @@ namespace ItsFrosti.OptimizationsMod
     {
         public const string PluginId = "ItsFrosti.OptimizationsMod";
         public const string PluginName = "Optimizations Mod";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.1";
         public const bool AutomaticUpdateEnabled = true;
         public const string UpdateRepository = "ItsFrostyYo/SubnauticaOptimizationMod";
         public const string UpdateManifestUrl = "https://raw.githubusercontent.com/" + UpdateRepository + "/main/dist/mod-update.xml";
 
         public override void Load(PluginContext context)
         {
+            PluginSettings.Initialize(context.Settings);
             context.Harmony.PatchAll(typeof(Plugin).Assembly);
             context.Logger.Info("Subnautica Optimization Mod Loaded");
         }
 
         public override void Unload()
         {
-            Optimizations.KeepBasePrefabs.Prefabs = null;
+            Optimizations.KeepBaseBundle.ReleaseRetained();
         }
     }
 }

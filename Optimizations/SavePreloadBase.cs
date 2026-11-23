@@ -12,7 +12,7 @@ namespace ItsFrosti.OptimizationsMod.Optimizations
 
         private static void Prefix(Array ___pieces)
         {
-            if (___pieces == null) return; 
+            if (!PluginSettings.SavePreloadBase || ___pieces == null) return;
             var prefab = AccessTools.Field(___pieces.GetType().GetElementType(), "prefab");
             Prefabs = new Transform[___pieces.Length]; 
             for (int i = 0; i < Prefabs.Length; i++)
@@ -24,11 +24,21 @@ namespace ItsFrosti.OptimizationsMod.Optimizations
     internal static class KeepBaseBundle
     {
         private const string Bundle = "basegeneratorpieces";
+        private static bool retained;
+
+        internal static void ReleaseRetained()
+        {
+            KeepBasePrefabs.Prefabs = null;
+            if (!retained || AccessTools.Field(typeof(Base), "pieces").GetValue(null) != null) return;
+            retained = false;
+            AssetBundleManager.UnloadBundle(Bundle);
+        }
 
         private static void Prefix(IDictionary ___loadedBundles, out object __state)
         {
             __state = null;
-            if (KeepBasePrefabs.Prefabs == null || !___loadedBundles.Contains(Bundle)) return;
+            retained = false;
+            if (!PluginSettings.SavePreloadBase || KeepBasePrefabs.Prefabs == null || !___loadedBundles.Contains(Bundle)) return;
             __state = ___loadedBundles[Bundle];
             ___loadedBundles.Remove(Bundle);
         }
@@ -38,6 +48,7 @@ namespace ItsFrosti.OptimizationsMod.Optimizations
             if (__state == null) return;
             AccessTools.Field(__state.GetType(), "numReferences").SetValue(__state, 1);
             ___loadedBundles[Bundle] = __state;
+            retained = true;
         }
     }
 }
