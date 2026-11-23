@@ -3,7 +3,7 @@ using SNSRModLoader;
 
 namespace ItsFrosti.OptimizationsMod
 {
-    [HarmonyPatch(typeof(uGUI_OptionsPanel), "AddGraphicsTab")]
+    [HarmonyPatch(typeof(uGUI_OptionsPanel), "AddTabs")]
     internal static class PluginSettings
     {
         private static SettingsFile settings;
