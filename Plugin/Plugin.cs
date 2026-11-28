@@ -19,12 +19,12 @@ namespace ItsFrosti.OptimizationsMod
         AutomaticUpdate = Plugin.AutomaticUpdateEnabled,
         UpdateRepository = Plugin.UpdateRepository,
         UpdateManifestUrl = Plugin.UpdateManifestUrl)]
-    [TargetVersion(GameVersion.September2018)]
+    [TargetVersions(GameVersion.September2018, GameVersion.December2021)]
     public sealed class Plugin : SNSRModLoader.Plugin
     {
         public const string PluginId = "ItsFrosti.OptimizationsMod";
         public const string PluginName = "Optimizations Mod";
-        public const string PluginVersion = "1.0.3";
+        public const string PluginVersion = "1.0.4";
         public const bool AutomaticUpdateEnabled = true;
         public const string UpdateRepository = "ItsFrostyYo/SubnauticaOptimizationMod";
         public const string UpdateManifestUrl = "https://raw.githubusercontent.com/" + UpdateRepository + "/main/dist/mod-update.xml";
